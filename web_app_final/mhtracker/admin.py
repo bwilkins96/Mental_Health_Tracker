@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import MentalLog
 
-# Register your models here.
+admin.site.register(MentalLog)
