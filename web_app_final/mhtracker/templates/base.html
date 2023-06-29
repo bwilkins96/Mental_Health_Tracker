@@ -19,6 +19,11 @@
             <a href="{% url 'mhtracker:index' %}">Home</a>
             <a href="{% url 'mhtracker:create' %}">Add log</a>
             <a href="{% url 'mhtracker:list' %}">View logs</a>
+
+            <div class="user_info">
+                <p>{{ user }}</p>
+                <a href="{% url 'logout' %}">Sign out</a>
+            </div>
             {% endblock %}
         </nav>
 
