@@ -1,0 +1,10 @@
+{% extends 'mhtracker/base.html' %}
+
+{% block main %}
+    <h1>Delete log: {{ mentallog }}</h1>
+
+    <form action='' method='post'>
+        {% csrf_token %}
+        <button type='submit'>Confirm delete</button>
+    </form>
+{% endblock %}

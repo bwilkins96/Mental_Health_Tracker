@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class MentalLog(models.Model):
     RATING_CHOICES = [
@@ -25,11 +26,21 @@ class MentalLog(models.Model):
         total = 0
         for log in recent_logs:
             total += log.mh_rating
-
+        
         return total / len(recent_logs)
 
     def get_date_str(self):
         return '{:%H:%M %m/%d/%Y}'.format(self.date_logged)
+    
+    def get_absolute_url(self):
+        return reverse('mhtracker:edit', args=[str(self.id)])
 
     def __str__(self):
         return f'{self.mh_rating}, {self.get_date_str()}'
+
+
+# from django.forms import ModelForm
+
+# class MentalLogForm(ModelForm):
+#     class Meta:
+#         model = MentalLog
