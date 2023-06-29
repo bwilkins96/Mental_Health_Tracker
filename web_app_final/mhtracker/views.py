@@ -10,7 +10,7 @@ from .forms import SignUpForm
 
 def index(request):
     num_logs = 10
-    avg = MentalLog.avg_mh_last(num_logs)
+    avg = MentalLog.avg_mh_last(num_logs, request.user)
     context = {
         'average': round(avg, 2),
         'num_logs': num_logs
@@ -43,16 +43,23 @@ class MentalLogListView(generic.ListView):
     model = MentalLog
     paginate_by = 10
     template_name = 'mhtracker/mh_log_list.html'
-    queryset = MentalLog.objects.order_by('-date_logged')
+
+    def get_queryset(self):
+        logs = MentalLog.objects.filter(user=self.request.user)
+        return logs.order_by('-date_logged')
 
 class MentalLogCreate(CreateView):
     model = MentalLog
-    fields = '__all__'
+    fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'med_change', 'sleep_well', 'notes']
     template_name = 'mhtracker/mh_log_form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class MentalLogUpdate(UpdateView):
     model = MentalLog
-    fields = '__all__'
+    fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'med_change', 'sleep_well', 'notes']
     template_name = 'mhtracker/mh_log_edit.html'
 
 class MentalLogDelete(DeleteView):

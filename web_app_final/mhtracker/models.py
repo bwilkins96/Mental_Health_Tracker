@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class MentalLog(models.Model):
     RATING_CHOICES = [
@@ -18,10 +19,12 @@ class MentalLog(models.Model):
     sleep_well = models.BooleanField('sleep well?')
     notes = models.TextField('personal notes', null=True, blank=True)
     date_logged = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     @classmethod
-    def avg_mh_last(cls, num_logs):
-        recent_logs = cls.objects.order_by('-date_logged')[:num_logs]
+    def avg_mh_last(cls, num_logs, user):
+        user_logs = cls.objects.filter(user=user)
+        recent_logs = user_logs.order_by('-date_logged')[:num_logs]
         
         total = 0
         for log in recent_logs:
@@ -38,9 +41,3 @@ class MentalLog(models.Model):
     def __str__(self):
         return f'{self.mh_rating}, {self.get_date_str()}'
 
-
-# from django.forms import ModelForm
-
-# class MentalLogForm(ModelForm):
-#     class Meta:
-#         model = MentalLog
