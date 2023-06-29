@@ -20,6 +20,7 @@ class MentalLogListView(generic.ListView):
     model = MentalLog
     paginate_by = 10
     template_name = 'mhtracker/mh_log_list.html'
+    queryset = MentalLog.objects.order_by('-date_logged')
 
 class MentalLogCreate(CreateView):
     model = MentalLog

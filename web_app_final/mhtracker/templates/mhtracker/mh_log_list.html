@@ -15,4 +15,18 @@
     {% else %}
         <p>There are currently no logs. <a href="{% url 'mhtracker:create' %}">Add one now!</a></p>
     {% endif %}
+    
+    {% if is_paginated %}
+        <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+
+        <nav>
+        {% if page_obj.has_previous %}
+            <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+        </nav>
+    {% endif %}
 {% endblock %}
