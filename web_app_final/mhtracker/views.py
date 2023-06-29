@@ -3,11 +3,15 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views import generic
+
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from .models import MentalLog
 from .forms import SignUpForm
 
+@login_required
 def index(request):
     num_logs = 10
     avg = MentalLog.avg_mh_last(num_logs, request.user)
@@ -39,7 +43,7 @@ def sign_up(request):
     }
     return render(request, 'registration/sign_up.html', context)
 
-class MentalLogListView(generic.ListView):
+class MentalLogListView(LoginRequiredMixin, generic.ListView):
     model = MentalLog
     paginate_by = 10
     template_name = 'mhtracker/mh_log_list.html'
@@ -48,7 +52,7 @@ class MentalLogListView(generic.ListView):
         logs = MentalLog.objects.filter(user=self.request.user)
         return logs.order_by('-date_logged')
 
-class MentalLogCreate(CreateView):
+class MentalLogCreate(LoginRequiredMixin, CreateView):
     model = MentalLog
     fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'med_change', 'sleep_well', 'notes']
     template_name = 'mhtracker/mh_log_form.html'
@@ -57,12 +61,12 @@ class MentalLogCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class MentalLogUpdate(UpdateView):
+class MentalLogUpdate(LoginRequiredMixin, UpdateView):
     model = MentalLog
     fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'med_change', 'sleep_well', 'notes']
     template_name = 'mhtracker/mh_log_edit.html'
 
-class MentalLogDelete(DeleteView):
+class MentalLogDelete(LoginRequiredMixin, DeleteView):
     model = MentalLog
     template_name = 'mhtracker/mh_log_delete.html'
     success_url = reverse_lazy('mhtracker:index')
