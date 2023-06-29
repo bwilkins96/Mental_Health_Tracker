@@ -1,0 +1,8 @@
+{% extends 'mhtracker/base.html' %}
+
+{% block main %}
+    <div class="mh_circle">
+        <p>{{ average }}</p>        
+    </div>
+    <p>Your average mental wellbeing over the past {{ num_logs }} logs</p>
+{% endblock %}

@@ -1,0 +1,14 @@
+body {
+    background-color: whitesmoke;
+}
+
+.mh_circle {
+    border-radius: 50%;
+    background-color: aquamarine;
+    padding: 40px;
+    width: fit-content;
+}
+
+.mh_circle p {
+    text-align: center;
+}

@@ -26,7 +26,7 @@ class MentalLog(models.Model):
         for log in recent_logs:
             total += log.mh_rating
 
-        return total / num_logs
+        return total / len(recent_logs)
 
     def get_date_str(self):
         return '{:%H:%M %m/%d/%Y}'.format(self.date_logged)

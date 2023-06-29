@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        {% block title %}
+        <title>Mental Health Tracker</title>
+        {% endblock %}
+        <link href="{% static 'mhtracker/main.css' %}" rel='stylesheet'>
+        {% block css %}
+        {% endblock %}
+    </head>
+    
+    <body>
+        <nav>
+            {% block nav %}
+            {% endblock %}
+        </nav>
+
+        <main>
+            {% block main %}
+            <p>Hello from base.html!</p>
+            {% endblock %}
+        </main>
+    </body>
+</html>
