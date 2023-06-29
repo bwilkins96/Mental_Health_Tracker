@@ -66,7 +66,13 @@ class MentalLogUpdate(LoginRequiredMixin, UpdateView):
     fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'med_change', 'sleep_well', 'notes']
     template_name = 'mhtracker/mh_log_edit.html'
 
+    def get_queryset(self):
+        return MentalLog.objects.filter(user=self.request.user)
+
 class MentalLogDelete(LoginRequiredMixin, DeleteView):
     model = MentalLog
     template_name = 'mhtracker/mh_log_delete.html'
     success_url = reverse_lazy('mhtracker:index')
+
+    def get_queryset(self):
+        return MentalLog.objects.filter(user=self.request.user)
