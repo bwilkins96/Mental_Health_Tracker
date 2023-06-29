@@ -1,7 +1,9 @@
 {% extends 'mhtracker/base.html' %}
 
 {% block main %}
-    <h1>Mental Health Log</h1>
+    <h1>Edit Log</h1>
+    <a href="{% url 'mhtracker:delete' object.id %}"><button>Delete</button></a>
+
     <form action="" method="post">
         {% csrf_token %}
         
