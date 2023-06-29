@@ -24,6 +24,7 @@ class MentalLog(models.Model):
     @classmethod
     def avg_mh_last(cls, num_logs, user):
         user_logs = cls.objects.filter(user=user)
+        if len(user_logs) == 0: return 0
         recent_logs = user_logs.order_by('-date_logged')[:num_logs]
         
         total = 0

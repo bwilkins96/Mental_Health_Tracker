@@ -2,7 +2,11 @@
 
 {% block main %}
     <div class="mh_circle">
-        <p>{{ average }}</p>        
+        {% if average %}
+            <p>{{ average }}</p>
+        {% else %}
+            <p>No logs yet!</p>
+        {% endif %}        
     </div>
     <p>Your average mental wellbeing over the past {{ num_logs }} logs</p>
 {% endblock %}
