@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.contrib.auth.models import User
 
 class MentalLog(models.Model):
@@ -18,23 +19,32 @@ class MentalLog(models.Model):
     took_med = models.BooleanField('took medicine?')
     sleep_quality = models.IntegerField('sleep quality', choices=RATING_CHOICES, default=5)
     notes = models.TextField('personal notes', null=True, blank=True)
-    date_logged = models.DateTimeField(auto_now=True)
+    date_logged = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     @classmethod
-    def avg_mh_last(cls, num_logs, user):
+    def get_averages(cls, num_logs, user):
         user_logs = cls.objects.filter(user=user)
-        if len(user_logs) == 0: return 0
+        if len(user_logs) == 0: return (0, 0, 0)
         recent_logs = user_logs.order_by('-date_logged')[:num_logs]
         
-        total = 0
+        total_mh = 0
+        total_env = 0
+        total_sleep = 0
         for log in recent_logs:
-            total += log.mh_rating
+            total_mh += log.mh_rating
+            total_env += log.env_rating
+            total_sleep += log.sleep_quality
         
-        return total / len(recent_logs)
+        len_logs = len(recent_logs)
+        avg_mh = total_mh / len_logs
+        avg_env = total_env / len_logs
+        avg_sleep = total_sleep /len_logs
+
+        return (avg_mh, avg_env, avg_sleep)
 
     def get_date_str(self):
-        return '{:%H:%M %m/%d/%Y}'.format(self.date_logged)
+        return '{:%H:%M %m/%d/%Y}'.format(timezone.localtime(self.date_logged))
     
     def get_absolute_url(self):
         return reverse('mhtracker:edit', args=[str(self.id)])

@@ -14,9 +14,11 @@ from .forms import SignUpForm
 @login_required
 def index(request):
     num_logs = 10
-    avg = MentalLog.avg_mh_last(num_logs, request.user)
+    avg_mh, avg_env, avg_sleep = MentalLog.get_averages(num_logs, request.user)
     context = {
-        'average': round(avg, 2),
+        'average_mh': round(avg_mh, 2),
+        'average_env': round(avg_env, 2),
+        'average_sleep': round(avg_sleep, 2),
         'num_logs': num_logs
     }
 

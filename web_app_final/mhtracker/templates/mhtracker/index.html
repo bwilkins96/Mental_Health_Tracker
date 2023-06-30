@@ -1,12 +1,38 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <div class="mh_circle">
-        {% if average %}
-            <p>{{ average }}</p>
-        {% else %}
-            <p>No logs yet!</p>
-        {% endif %}        
+    <div class="avg_container">
+        <div class="circle">
+            {% if average_mh %}
+                <p>{{ average_mh }}</p>
+            {% else %}
+                <p>No logs!</p>
+            {% endif %}        
+        </div>
+        <p>Your average mental wellbeing over the past {{ num_logs }} logs</p>
     </div>
-    <p>Your average mental wellbeing over the past {{ num_logs }} logs</p>
+
+ 
+    <div class="avg_container">
+        <div class="circle">
+            {% if average_env %}
+                <p>{{ average_env }}</p>
+            {% else %}
+                <p>No logs!</p>
+            {% endif %}        
+        </div>
+        <p>Your average daily environment quality over the past {{ num_logs }} logs</p>
+    </div>
+
+    <div class="avg_container">
+        <div class="circle">
+            {% if average_sleep %}
+                <p>{{ average_sleep }}</p>
+            {% else %}
+                <p>No logs!</p>
+            {% endif %}        
+        </div>
+        <p>Your average sleep quality over the past {{ num_logs }} logs</p>
+    </div>
+    
 {% endblock %}
