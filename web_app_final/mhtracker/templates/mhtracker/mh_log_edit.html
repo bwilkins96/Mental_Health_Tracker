@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <h1>Edit Log</h1>
-    <a href="{% url 'mhtracker:delete' object.id %}"><button>Delete</button></a>
-
-    <form action="" method="post">
+    <form action="" method="post" id='edit_form'>
         {% csrf_token %}
         
+        <div class="form_header">
+            <h1>Edit Log</h1>
+            <a href="{% url 'mhtracker:delete' object.id %}" id="delete_btn">
+                <button type="button">Delete</button>
+            </a>
+        </div>
+
         <table>
             {{ form.as_table }}
         </table>
