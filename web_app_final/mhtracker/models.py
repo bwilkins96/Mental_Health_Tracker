@@ -53,6 +53,10 @@ class MentalLog(models.Model):
         log_str = f'Mental Health: {self.mh_rating}/5'
         log_str += f', Environment: {self.env_rating}/5'
         log_str += f', Sleep: {self.sleep_quality}/5'
+        log_str += f' - {self.get_date_str()} '
 
-        log_str += f' - {self.get_date_str()}'
+        if self.diet_change: log_str += 'D'
+        if self.exercise: log_str += 'E'
+        if self.took_med: log_str += 'M'
+        
         return log_str

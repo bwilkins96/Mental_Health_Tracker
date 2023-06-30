@@ -3,14 +3,24 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 3px solid orange; */
+    font-family: 'Arial', sans-serif;
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 3px solid orange; */
+}
+
+a {
+    text-decoration: none;
+    color: rgb(55, 55, 200);
+}
+
+a:hover {
+    color: rgb(225, 80, 80);
+    background: rgb(235, 235, 235);
+    border-radius: 5px;
 }
 
 /* nav bar  */
@@ -21,6 +31,16 @@ main {
     align-items: center;
     padding-left: 2.25vw;
     padding-right: 2.25vw;
+}
+
+#nav_bar a {
+    color: rgb(50, 50, 125);
+}
+
+#nav_bar a:hover {
+    background-color: rgb(100, 150, 175);
+    color: white;
+    text-shadow: 1px;
 }
 
 #nav_bar > a {
@@ -76,6 +96,14 @@ form {
     margin-top: 50px;
 }
 
+#create_form {
+    background-color: rgb(220, 255, 220)
+}
+
+#edit_form {
+    background-color: rgb(240, 240, 255);
+}
+
 #delete_btn {
     margin-left: 15px;
 }
@@ -84,6 +112,20 @@ form h1 {
     margin-top: 0;
     margin-bottom: 15px;
     text-align: center;
+}
+
+form table th {
+    text-align: left;
+    vertical-align: top;
+    padding-bottom: 12px;
+}
+
+form table td {
+    text-align: center;
+}
+
+form textarea {
+    width: 400px;
 }
 
 #login_form, #sign_up_form {
@@ -105,10 +147,16 @@ form h1 {
 #log_list {
     margin: auto;
     padding: 0;
+    text-align: center;
+    list-style: none;
+}
+
+#log_list li {
+    margin-bottom: 15px;
 }
 
 #page_nav {
-    width: 95%;
+    width: 400px;
 }
 
 #page_nav > p {
@@ -122,4 +170,9 @@ form h1 {
 
 #next_a {
     float: right
+}
+
+/* delete form */
+#delete_form {
+    border: none;
 }
