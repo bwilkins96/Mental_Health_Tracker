@@ -4,7 +4,7 @@
     <h1>Mental Health Log List</h1>
 
     {% if object_list %}
-        <ul>
+        <ul id="log_list">
         {% for log in object_list %}
             <li>
                 <a href="{{ log.get_absolute_url }}">{{ log }}</a>
@@ -13,19 +13,19 @@
         </ul>
 
     {% else %}
-        <p>There are currently no logs. <a href="{% url 'mhtracker:create' %}">Add one now!</a></p>
+        <p>There are currently no logs. <a href="{% url 'mhtracker:create' %}" id="prev_a">Add one now!</a></p>
     {% endif %}
     
     {% if is_paginated %}
         <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
 
-        <nav>
+        <nav id='page_nav'>
         {% if page_obj.has_previous %}
             <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Previous</a>
         {% endif %}
 
         {% if page_obj.has_next %}
-            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" id="next_a">Next</a>
         {% endif %}
         </nav>
     {% endif %}

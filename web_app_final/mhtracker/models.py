@@ -50,5 +50,9 @@ class MentalLog(models.Model):
         return reverse('mhtracker:edit', args=[str(self.id)])
 
     def __str__(self):
-        return f'{self.mh_rating}, {self.get_date_str()}'
+        log_str = f'Mental Health: {self.mh_rating}/5'
+        log_str += f', Environment: {self.env_rating}/5'
+        log_str += f', Sleep: {self.sleep_quality}/5'
 
+        log_str += f' - {self.get_date_str()}'
+        return log_str
