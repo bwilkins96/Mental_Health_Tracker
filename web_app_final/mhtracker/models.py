@@ -6,7 +6,7 @@ class MentalLog(models.Model):
     RATING_CHOICES = [
         (5, '5 - Best'),
         (4, '4'),
-        (3, '3 -Middle'),
+        (3, '3 - Middle'),
         (2, '2'),
         (1, '1 - Worst')        
     ]
@@ -15,8 +15,8 @@ class MentalLog(models.Model):
     env_rating = models.IntegerField('daily environment rating', choices=RATING_CHOICES, default=5)
     diet_change = models.BooleanField('diet change?')
     exercise = models.BooleanField('exercise today?')
-    med_change = models.BooleanField('medication change?')
-    sleep_well = models.BooleanField('sleep well?')
+    med_change = models.BooleanField('took medicine?')
+    sleep_well = models.IntegerField('sleep quality', choices=RATING_CHOICES, default=5)
     notes = models.TextField('personal notes', null=True, blank=True)
     date_logged = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
