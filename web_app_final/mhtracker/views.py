@@ -54,7 +54,7 @@ class MentalLogListView(LoginRequiredMixin, generic.ListView):
 
 class MentalLogCreate(LoginRequiredMixin, CreateView):
     model = MentalLog
-    fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'med_change', 'sleep_well', 'notes']
+    fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'took_med', 'sleep_quality', 'notes']
     template_name = 'mhtracker/mh_log_form.html'
 
     def form_valid(self, form):
@@ -63,7 +63,7 @@ class MentalLogCreate(LoginRequiredMixin, CreateView):
 
 class MentalLogUpdate(LoginRequiredMixin, UpdateView):
     model = MentalLog
-    fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'med_change', 'sleep_well', 'notes']
+    fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'took_med', 'sleep_quality', 'notes']
     template_name = 'mhtracker/mh_log_edit.html'
 
     def get_queryset(self):
