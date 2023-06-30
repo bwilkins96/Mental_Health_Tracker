@@ -152,7 +152,13 @@ form textarea {
 }
 
 #log_list li {
-    margin-bottom: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#log_list li a {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 #page_nav {
