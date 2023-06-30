@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block main %}
     <div class="avg_container">
         <div class="circle">
@@ -34,5 +35,7 @@
         </div>
         <p>Your average sleep quality over the past {{ num_logs }} logs</p>
     </div>
+
+    <script src="{% static 'mhtracker/index_script.js' %}"></script>
     
 {% endblock %}
