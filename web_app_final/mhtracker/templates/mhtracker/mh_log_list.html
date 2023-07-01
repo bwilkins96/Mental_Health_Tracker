@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block main %}
     <h1>Mental Health Log List</h1>
 
@@ -13,7 +14,8 @@
         </ul>
 
     {% else %}
-        <p>There are currently no logs. <a href="{% url 'mhtracker:create' %}" id="prev_a">Add one now!</a></p>
+        <p>There are currently no logs.</p> 
+        <a href="{% url 'mhtracker:create' %}" id="prev_a">Add one now!</a>
     {% endif %}
     
     {% if is_paginated %}
@@ -29,4 +31,6 @@
         {% endif %}
         </nav>
     {% endif %}
+
+    <script src={% static 'mhtracker/list_script.js' %}></script>
 {% endblock %}

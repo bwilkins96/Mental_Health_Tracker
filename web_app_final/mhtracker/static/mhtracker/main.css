@@ -158,7 +158,8 @@ form textarea {
 
 #log_list li a {
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 16px;
+    border-radius: 0;
 }
 
 #page_nav {
