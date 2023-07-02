@@ -1,3 +1,7 @@
+// SWDV 620: Web Applications
+// Script for changing background color of list elements based on average log value 
+
+// Returns average of mental health, environment, and sleep quality ratings for log
 function parseAvg(li){
     const inner = li.innerText;
     
@@ -8,6 +12,7 @@ function parseAvg(li){
     return (mh_avg + env_avg + sleep_avg) / 3;
 }
 
+// Sets the background of the li element based on the passed-in avg
 function setBackground(li, avg) {
     let color = '';
 

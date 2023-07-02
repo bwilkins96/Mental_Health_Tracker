@@ -1,3 +1,6 @@
+# SWDV 620: Web Applications
+# Settings file for final project
+
 """
 Django settings for web_app_final project.
 

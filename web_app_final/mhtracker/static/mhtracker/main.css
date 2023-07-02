@@ -1,3 +1,7 @@
+/* SWDV 620: Web Applications */
+/* CSS file for styling application pages */
+
+/* Application-wide styles */
 body {
     background-color: whitesmoke;
     display: flex;
@@ -83,7 +87,6 @@ form {
     border: 1px solid black;
     padding: 15px;
     border-radius: 20px;
-    /* background-color: rgb(245, 245, 245); */
 }
 
 .form_header {

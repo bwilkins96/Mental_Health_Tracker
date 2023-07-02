@@ -4,10 +4,7 @@
     <form action="" method="post" id="create_form">
         {% csrf_token %}
 
-        {% comment %} <div class="form_header"> {% endcomment %}
-            <h1>Mental Health Log</h1>
-        {% comment %} </div> {% endcomment %}
-
+        <h1>Mental Health Log</h1>
         <table>
             {{ form.as_table }}
         </table>

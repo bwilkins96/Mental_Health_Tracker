@@ -13,6 +13,7 @@ from .forms import SignUpForm
 
 @login_required
 def index(request):
+    """Index page view function that passes average ratings into context"""
     num_logs = 10
     avg_mh, avg_env, avg_sleep = MentalLog.get_averages(num_logs, request.user)
     context = {
@@ -25,6 +26,7 @@ def index(request):
     return render(request, 'mhtracker/index.html', context)
 
 def sign_up(request):
+    """Sign up view function for adding a user to the application database"""
     if request.method == 'POST':
         form = SignUpForm(request.POST)
 
@@ -46,6 +48,7 @@ def sign_up(request):
     return render(request, 'registration/sign_up.html', context)
 
 class MentalLogListView(LoginRequiredMixin, generic.ListView):
+    """MentalLog list view class with pagination"""
     model = MentalLog
     paginate_by = 10
     template_name = 'mhtracker/mh_log_list.html'
@@ -55,6 +58,7 @@ class MentalLogListView(LoginRequiredMixin, generic.ListView):
         return logs.order_by('-date_logged')
 
 class MentalLogCreate(LoginRequiredMixin, CreateView):
+    """MentalLog create view class"""
     model = MentalLog
     fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'took_med', 'sleep_quality', 'notes']
     template_name = 'mhtracker/mh_log_form.html'
@@ -64,6 +68,7 @@ class MentalLogCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 class MentalLogUpdate(LoginRequiredMixin, UpdateView):
+    """MentalLog update view class"""
     model = MentalLog
     fields = ['mh_rating', 'env_rating', 'diet_change', 'exercise', 'took_med', 'sleep_quality', 'notes']
     template_name = 'mhtracker/mh_log_edit.html'
@@ -72,6 +77,7 @@ class MentalLogUpdate(LoginRequiredMixin, UpdateView):
         return MentalLog.objects.filter(user=self.request.user)
 
 class MentalLogDelete(LoginRequiredMixin, DeleteView):
+    """MentalLog delete view class"""
     model = MentalLog
     template_name = 'mhtracker/mh_log_delete.html'
     success_url = reverse_lazy('mhtracker:index')

@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 class MentalLog(models.Model):
+    """Mental health log model class"""
+    
     RATING_CHOICES = [
         (5, '5 - Best'),
         (4, '4'),
@@ -24,6 +26,7 @@ class MentalLog(models.Model):
 
     @classmethod
     def get_averages(cls, num_logs, user):
+        """Returns the average ratings for the past num_logs logs"""
         user_logs = cls.objects.filter(user=user)
         if len(user_logs) == 0: return (0, 0, 0)
         recent_logs = user_logs.order_by('-date_logged')[:num_logs]
@@ -44,9 +47,11 @@ class MentalLog(models.Model):
         return (avg_mh, avg_env, avg_sleep)
 
     def get_date_str(self):
+        """Returns formatted date string"""
         return '{:%H:%M %m/%d/%Y}'.format(timezone.localtime(self.date_logged))
     
     def get_absolute_url(self):
+        """Returns the url for an instance's edit page"""
         return reverse('mhtracker:edit', args=[str(self.id)])
 
     def __str__(self):

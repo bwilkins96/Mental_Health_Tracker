@@ -6,7 +6,8 @@ from .models import MentalLog
 from .forms import SignUpForm
 
 class MentalLogModelTests(TestCase):
-    
+    """Tests for the MentalLog class"""
+
     @classmethod
     def setUpTestData(cls):
         test_user = User.objects.create_user(username='test_user')
@@ -29,6 +30,7 @@ class MentalLogModelTests(TestCase):
         self.assertEqual(test_log.get_absolute_url(), '/logs/1/')
 
 class SignUpFormTests(TestCase):
+    """Tests for SignUpForm class"""
     
     def test_invalid_on_different_passwords(self):
         test_form = SignUpForm({'username': 'test_user', 'password': 'test', 
@@ -50,6 +52,7 @@ class SignUpFormTests(TestCase):
         self.assertEqual(test_form.is_valid(), True)
 
 class ViewTests(TestCase):
+    """Tests for behavior of views"""
 
     @classmethod
     def setUpTestData(cls):
@@ -61,6 +64,7 @@ class ViewTests(TestCase):
                                  diet_change=False, exercise=False, took_med=False)
     @classmethod       
     def get_urls(cls, id):
+        """Returns list of correct urls for mhtracker views"""
         url_info = [('index', False), ('list', False), ('create', False), ('delete', True), ('edit', True)]
         urls = []
 
@@ -98,6 +102,7 @@ class ViewTests(TestCase):
             self.assertEqual(response_2.status_code, 404)
 
     def test_list_view(self):
+        """Tests the pagination and date ordering of the list view page"""
         test_user = User.objects.get(username='test_user')
         self.client.login(username='test_user', password='P3jwt/VWMENJNA==')
         

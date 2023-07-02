@@ -1,3 +1,6 @@
+// SWDV 620: Web Applications
+// Script for changing circle colors on index page based on average scores
+
 function changeCircleColor(circle) {
     const pEle = circle.querySelector('p');
     const avg = Number(pEle.innerText);
